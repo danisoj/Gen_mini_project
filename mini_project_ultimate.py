@@ -116,8 +116,8 @@ def order_update_details():
         print(indx, order)
     indx_input = int(input('Enter order index: '))
     selected_order = order_list[indx_input]
-    for indx, (key, value) in enumerate(selected_order.items()):
-        print(indx, key, value)
+    for key, value in selected_order.items():
+        print(key, value)
     key = (input('Enter key you want to update '))
     selected_order [f'{key}'] = input('enter value ')
     #update the key specifically

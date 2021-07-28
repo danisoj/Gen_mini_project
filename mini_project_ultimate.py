@@ -102,6 +102,26 @@ def order_input():
         elif 'N' in add_order:
             break
 
+def order_update_stat():
+    for indx, order in enumerate (order_list):
+        print(indx, order)
+    indx_input = int(input('Enter order index: '))
+    selected_order= order_list[indx_input]
+    selected_order['status'] = input('Enter status update ')
+    #maybe put a try and catch if the order list is empty
+    print(order_list)
+
+def order_update_details():
+    for indx, order in enumerate (order_list):
+        print(indx, order)
+    indx_input = int(input('Enter order index: '))
+    selected_order = order_list[indx_input]
+    for indx, (key, value) in enumerate(selected_order.items()):
+        print(indx, key, value)
+    key = (input('Enter key you want to update '))
+    selected_order [f'{key}'] = input('enter value ')
+    #update the key specifically
+
 #something is wrong and i dont know what, i honestly dont even know how i got this to run
 while True:
     print('Main Menu Options')
@@ -159,7 +179,7 @@ while True:
 
     if main_menu == 3:
         print('Orders Menu')
-        orders_dict = (input('Enter 0 to RETURN. \nEnter 1 for ORDERS.\nEnter 2 to INPUT ORDER \nEnter 3 to UPDATE '))
+        orders_dict = (input('Enter 0 to RETURN. \nEnter 1 for ORDERS.\nEnter 2 to INPUT ORDER \nEnter 3 to UPDATE STATUS \nEnter 4 to UPDATE ORDER DETAILS '))
 
         if orders_dict == 0:
             main_menu
@@ -169,3 +189,9 @@ while True:
         
         elif '2' in orders_dict:
             order_input()
+        
+        elif '3' in orders_dict:
+            order_update_stat()
+            
+        elif '4' in orders_dict:
+            order_update_details()

@@ -37,12 +37,12 @@ def delete_item():
     print('Product List')
     for indx, item in enumerate(productslist):
         print(indx,item)
-        indx_input = int(input('Enter product index: '))
-        del_item = productslist[indx_input]
-        print(f'You have selected to DELETE {del_item}')
-        productslist.pop(indx_input)
-        print('Here is the updated list:\n')
-        print(productslist)
+    indx_input = int(input('Enter product index: '))
+    del_item = productslist[indx_input]
+    print(f'You have selected to DELETE {del_item}')
+    productslist.pop(indx_input)
+    print('Here is the updated list:\n')
+    print(productslist)
 
 #COURIERS FUNCTIONS
 def couriers_list():
@@ -70,12 +70,12 @@ def delete_couriers():
     print('Courier List')
     for indx, courier in enumerate(courierslist):
         print(indx,courier)
-        indx_input = int(input('Enter courier index: '))
-        del_courier = courierslist[indx_input]
-        print(f'You have selected to DELETE {del_courier}')
-        courierslist.pop(indx_input)
-        print('Here is the updated list:\n')
-        print(courierslist)
+    indx_input = int(input('Enter courier index: '))
+    del_courier = courierslist[indx_input]
+    print(f'You have selected to DELETE {del_courier}')
+    courierslist.pop(indx_input)
+    print('Here is the updated list: ')
+    print(courierslist)
 
 #ORDERS FUNCTIONS
 def list_orders():
@@ -121,6 +121,13 @@ def order_update_details():
     key = (input('Enter key you want to update '))
     selected_order [f'{key}'] = input('enter value ')
     #update the key specifically
+
+def order_del():
+    for indx, order in enumerate (order_list):
+        print(indx, order)
+    indx_input = int(input('Enter order index: '))
+    selected_order = order_list[indx_input]
+    order_list.pop(indx_input)
 
 #something is wrong and i dont know what, i honestly dont even know how i got this to run
 while True:
@@ -179,7 +186,7 @@ while True:
 
     if main_menu == 3:
         print('Orders Menu')
-        orders_dict = (input('Enter 0 to RETURN. \nEnter 1 for ORDERS.\nEnter 2 to INPUT ORDER \nEnter 3 to UPDATE STATUS \nEnter 4 to UPDATE ORDER DETAILS '))
+        orders_dict = (input('Enter 0 to RETURN. \nEnter 1 for ORDERS.\nEnter 2 to INPUT ORDER \nEnter 3 to UPDATE STATUS \nEnter 4 to UPDATE ORDER DETAILS \nEnter 5 to DELETE order '))
 
         if orders_dict == 0:
             main_menu
@@ -195,3 +202,6 @@ while True:
             
         elif '4' in orders_dict:
             order_update_details()
+        
+        elif '5' in orders_dict:
+            order_del()

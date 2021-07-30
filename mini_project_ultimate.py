@@ -1,7 +1,13 @@
-productslist = ['Coke Zero', 'Fanta', 'Mineral Water', 'Lemonade'] 
-courierslist = ['Aang', 'Zuko', 'Sokka', 'Toph', 'Katara'] 
-orders = {'customer_name':'', 'customer_address':'', 'customer_phone':'','courier':'', 'status':''}
+productslist = {'id':1, 'name':'Coke', 'price': 1.8}
+list_products = []
+
+courierslist = {'id':1, 'name':'Ocado', 'phone':'07985666274'} 
+list_couriers = []
+
+orders = {'customer_name':'', 'customer_address':'', 'customer_phone':'','courier':'', 'status':'', 'items': []}
 order_list = []
+
+#LOAD PRODUCTS COURIERS AND ORDER LIST
 
 
 print('Welcome to the Home Page')
@@ -13,69 +19,72 @@ def exit_menu():
 #PRODUCT FUNCTIONS
 
 def prodcucts_list():
-    for product in productslist:
-        print(product)
+    print(list_products)
     
 def add_to_list():
-    productslist.append((input('Enter product to add to product list ')))
-    print(productslist)
-    
+    while True:
+        add_product = input('Would you like to add a product? Y/N ' )
+        if 'Y'in add_product:
+            current_product = dict(productslist)
+            current_product['id'] = input('Enter id ')
+            current_product['name'] = input('Enter product name ' )
+            current_product['price'] = input('Enter price ')
+            list_products.append(current_product)
+        elif 'N' in add_product:
+            break
+
 def update_list():
     print('Product List \n')
-    for indx, item in enumerate(productslist):
-        print(indx, item)
+    for indx, product in enumerate (list_products):
+        print(indx, product)
     indx_input = int(input('Enter product index: '))
-    selected_item = productslist[indx_input]
-    print(f'You have selected to UPDATE {selected_item}')
-    replacement = input('Enter product update: ')
-    productslist[indx_input] = replacement
-    print(f'You have updated {selected_item} to {replacement}')
-    print('Here is the updated list:')
-    print(productslist)
+    selected_product = list_products[indx_input]
+    for key, value in selected_product.items():
+        print(key, value)
+    key = (input('Enter key you want to update '))
+    selected_product [f'{key}'] = input('Enter updated value ')
 
 def delete_item():
     print('Product List')
-    for indx, item in enumerate(productslist):
-        print(indx,item)
+    for indx, product in enumerate (list_products):
+        print(indx, product)
     indx_input = int(input('Enter product index: '))
-    del_item = productslist[indx_input]
-    print(f'You have selected to DELETE {del_item}')
-    productslist.pop(indx_input)
-    print('Here is the updated list:\n')
-    print(productslist)
+    selected_product = list_products[indx_input]
+    list_products.pop(indx_input)
 
-#COURIERS FUNCTIONS
+# #COURIERS FUNCTIONS
 def couriers_list():
-    for courier in courierslist:
-        print(courier)
+    print(list_couriers)
     
 def couriers_add_to_list():
-    courierslist.append((input('Enter courier to add to courier list ')))
-    print(courierslist)
+    while True:
+        add_courier = input('Would you like to add a courier? Y/N ' )
+        if 'Y'in add_courier:
+            current_courier = dict(productslist)
+            current_courier['id'] = input('Enter id ')
+            current_courier['name'] = input('Enter courier name ' )
+            current_courier['phone'] = input('Enter phone ')
+            list_couriers.append(current_courier)
+        elif 'N' in add_courier:
+            break
     
 def couriers_update_list():
-    print('Couriers List \n')
-    for indx, courier in enumerate(courierslist):
+    for indx, courier in enumerate (list_couriers):
         print(indx, courier)
     indx_input = int(input('Enter courier index: '))
-    selected_courier= courierslist[indx_input]
-    print(f'You have selected to UPDATE {selected_courier}')
-    replacement = input('Enter couriers update: ')
-    courierslist[indx_input] = replacement
-    print(f'You have updated {selected_courier} to {replacement}')
-    print('Here is the updated list:')
-    print(courierslist)
+    selected_courier = list_couriers[indx_input]
+    for key, value in selected_courier.items():
+        print(key, value)
+    key = (input('Enter key you want to update '))
+    selected_courier [f'{key}'] = input('Enter value ')
 
 def delete_couriers():
     print('Courier List')
-    for indx, courier in enumerate(courierslist):
-        print(indx,courier)
+    for indx, courier in enumerate (list_couriers):
+        print(indx, courier)
     indx_input = int(input('Enter courier index: '))
-    del_courier = courierslist[indx_input]
-    print(f'You have selected to DELETE {del_courier}')
-    courierslist.pop(indx_input)
-    print('Here is the updated list: ')
-    print(courierslist)
+    selected_courieru = list_couriers[indx_input]
+    list_couriers.pop(indx_input)
 
 #ORDERS FUNCTIONS
 def list_orders():
@@ -134,14 +143,18 @@ while True:
     print('Main Menu Options')
     main_menu = int(input('Enter 1 for PRODUCT MENU\nEnter 0 to  SAVE & EXIT \nEnter 2 for COURIER MENU \nEnter 3 for ORDERS '))
     if main_menu == 0:
-        #SAVE PRODUCTS LIST AND COURIERS INTO TEXT FILE
+        #SAVE PRODUCTS LIST AND COURIERS INTO CSV FILE
         #insert a try except when you can
-        with open('productslist.txt', 'w') as prodlst:
+        with open('productslist.csv', 'w') as prodlst:
             for product in productslist:
                 prodlst.write(product + '\n')
-        with open('courierslist.txt', 'w') as courlst:
+        with open('courierslist.csv', 'w') as courlst:
             for courier in courierslist:
                 courlst.write(courier + '\n')
+        with open ('orderslist.csv,' 'w') as ordrlist:
+            for order in order_list:
+                ordrlist.write(order + '\n')
+            
         exit_menu()
         break
 

@@ -9,8 +9,6 @@ list_couriers = [{'id':1, 'name':'Ocado', 'phone':'07985666274'}, {'id':2, 'name
 orders = {'customer_name':'Slim Shady', 'customer_address':'Please Stand Up Avenue', 'customer_phone':'0776342332','courier':2, 'status':'PREPARING', 'items': ['1','2']}
 order_list = [{'customer_name':'Naruto Uzumaki', 'customer_address':'Hidden Leaf Village', 'customer_phone':'074657722','courier':3, 'status':'PREPARING', 'items': ['4']},{'customer_name':'Slim Shady', 'customer_address':'Please Stand Up Avenue', 'customer_phone':'0776342332','courier':2, 'status':'PREPARING', 'items': ['1','2']}]
 
-#LOAD PRODUCTS COURIERS AND ORDER LIST
-
 
 print('Welcome to the Home Page')
 
@@ -45,7 +43,6 @@ def update_list():
         print(key, value)
     key = (input('Enter key you want to update '))
     selected_product [f'{key}'] = input('Enter updated value ')
-
 #problem is if you leave the key empty it creates another empty key with empty value. maybe put in an if statement
 
 def delete_item():
@@ -113,7 +110,6 @@ def order_input():
                 print( indx,courier)
             indx_input = int(input('Enter courier index: '))
             selected_courier = list_couriers[indx_input]
-            # print(f'You have selected {selected_courier}')
             current_order['courier'] = selected_courier['id']
             current_order['status'] = 'PREPARING...'
             order_list.append(current_order)
@@ -139,7 +135,6 @@ def order_update_details():
     key = (input('Enter key you want to update '))
     selected_order [f'{key}'] = input('enter value ')
     #update the key specifically
-    #when updating the value for a key that has a list you have to put it in list format
 
 def order_del():
     for indx, order in enumerate (order_list):
@@ -154,45 +149,33 @@ def product_csv():
     with open('productslist.csv', 'w') as prodlst:
         writer = csv.DictWriter(prodlst, fieldnames=csv_columns)
         writer.writeheader()
-        print(list_products)
         for product in list_products:
             writer.writerow(product)
 
-# def courier_csv():
-#     csv_columns = ['id', 'name' 'phone']
-#     with open('courierslist.csv', 'w') as courlst:
-#         writer = csv.DictWriter(courlst, fieldnames=csv_columns)
-#         writer.writeheader()
-#         for courier in list_couriers:
-#             writer.writerow(courier)
+def courier_csv():
+    csv_columns = ['id', 'name', 'phone']
+    with open('courierslist.csv', 'w') as courlst:
+        writer = csv.DictWriter(courlst, fieldnames=csv_columns)
+        writer.writeheader()
+        for courier in list_couriers:
+            writer.writerow(courier)
 
-# def order_csv():
-#     csv_columns = ['customer_name', 'customer_address', 'customer_phone', 'courier', 'items' ]
-#     with open('orderslist.csv', 'w') as ordrlst:
-#         writer = csv.DictWriter(ordrlst, fieldnames=csv_columns)
-#         writer.writeheader()
-#         for order in order_list:
-#             writer.writerow(order)
+def order_csv():
+    csv_columns = ['customer_name', 'customer_address', 'customer_phone', 'courier','status', 'items' ]
+    with open('orderslist.csv', 'w') as ordrlst:
+        writer = csv.DictWriter(ordrlst, fieldnames=csv_columns)
+        writer.writeheader()
+        for order in order_list:
+            writer.writerow(order)
 
-#something is wrong and i dont know what, i honestly dont even know how i got this to run
 while True:
     print('Main Menu Options')
-    main_menu = int(input('Enter 1 for PRODUCT MENU\nEnter 0 to  SAVE & EXIT \nEnter 2 for COURIER MENU \nEnter 3 for ORDERS '))
+    main_menu = int(input('Enter 0 to  SAVE & EXIT \nEnter 1 for PRODUCT MENU\nEnter 2 for COURIER MENU \nEnter 3 for ORDERS '))
     if main_menu == 0:
         product_csv()
-        # courier_csv()
-        # order_csv()
-        #SAVE PRODUCTS LIST AND COURIERS INTO CSV FILE
-        #insert a try except when you can
-        # with open('productslist.csv', 'w') as prodlst:
-        #     for product in list_products:
-        #         prodlst.write(product + '\n')
-        # with open('courierslist.csv', 'w') as courlst:
-        #     for courier in list_couriers:
-        #         courlst.write(courier + '\n')
-        # with open ('orderslist.csv', 'w') as ordrlist:
-        #     for order in order_list:
-        #         ordrlist.write(order + '\n')
+        courier_csv()
+        order_csv()
+
             
         exit_menu()
         break
@@ -207,7 +190,7 @@ while True:
 
         elif '1' in products_menu:
             prodcucts_list()
-#why is the list running 4 times
+
         elif '2' in products_menu:
             add_to_list()
 
